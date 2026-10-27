@@ -1,16 +1,16 @@
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import EmailStr
+from sqlmodel import SQLModel, Field
 
 
-
-class CustomerBase(BaseModel):
-    name: str = Field(..., description="The name of the customer")
-    email: EmailStr = Field(..., description="The email address of the customer")
-    age : int = Field(..., gt=0, description="The age of the customer, must be greater than 0")
+class CustomerBase(SQLModel):
+    name: str = Field(default=None, description="The name of the customer")
+    email: EmailStr = Field(default=None, description="The email address of the customer")
+    age : int = Field(default=None, gt=0, description="The age of the customer, must be greater than 0")
 
 
 class CustomerCreate(CustomerBase):
     pass
 
 
-class Customer(CustomerBase):
-    id: int | None = Field(None, description="The unique identifier for the customer")
+class Customer(CustomerBase,table=True):
+    id: int | None = Field(default=None, primary_key=True, description="The unique identifier for the customer")
