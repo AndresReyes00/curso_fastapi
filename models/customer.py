@@ -12,5 +12,29 @@ class CustomerCreate(CustomerBase):
     pass
 
 
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "name": "JimcostDev",
+                "email": "email@test.com",
+                "age": 25
+            }
+        }
+
+
+class CustomerUpdate(CustomerBase):
+    pass
+
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "name": "JimcostDev",
+                "email": "email@test.com",
+                "age": 25
+            }
+        }
+
+
 class Customer(CustomerBase,table=True):
     id: int | None = Field(default=None, primary_key=True, description="The unique identifier for the customer")
